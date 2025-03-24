@@ -43,4 +43,91 @@
             }
         </style>
     </head>
+    <body>
+        <div id="terminal">
+            <div id="output"></div>
+            <div id="input-line">
+                <span id="prompt">visitor@terminal:~$</span>
+                <input type="text" id="command-input" autocomplete="off">
+            </div>
+        </div>
+
+        <script>
+            const output = document.getElementById('output');
+            const input = document.getElementById('command-input');
+            const pages = {
+                help: `Available Commands:
+    - help: Show this help menu
+    - about: Learn about the company/person
+    - contact: View contact information
+    - projects: List of current projects
+    - skills: Technical skills and expertise
+    - clear: Clear the terminal screen
+    - exit: Reset the terminal`,
+                about: `About Me/Company
+    Name: Interlink AI
+    Location: worldwide
+    Our mission: to build the world's most advanced Home assistant
+    AI Assistant name: Trinity
+    Founded: 2024`,
+            contact: `Contact Information:
+    Email: skyweb.vishwa@gmail.com
+    GitHub: https://github.com/vishwagw
+    LinkedIn: https://www.linkedin.com/in/vishwagw/`,
+                projects: `Current Projects:
+    - Trinity: AI Home Assistant
+    1. Terminal Website Interface
+2. Command-Line Web Experience
+3. Interactive Portfolio Platform`,
+            skills: `Technical Skills:
+- Web Development
+- Terminal Interfaces
+- Interactive Design
+- User Experience Engineering`
+        };
+
+        // Welcome message
+        output.innerHTML = `Welcome to Interlink AI, where we build future of smart home AI,
+Type 'help' to see available commands\n`;
+
+        input.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const command = input.value.trim().toLowerCase();
+                processCommand(command);
+                input.value = '';
+            }
+        });
+
+        function processCommand(command) {
+            output.innerHTML += `visitor@terminal:~$ ${command}\n`;
+
+            switch(command) {
+                case 'help':
+                    output.innerHTML += pages.help + '\n';
+                    break;
+                case 'about':
+                    output.innerHTML += pages.about + '\n';
+                    break;
+                case 'contact':
+                    output.innerHTML += pages.contact + '\n';
+                    break;
+                case 'projects':
+                    output.innerHTML += pages.projects + '\n';
+                    break;
+                case 'skills':
+                    output.innerHTML += pages.skills + '\n';
+                    break;
+                case 'clear':
+                    output.innerHTML = '';
+                    break;
+                case 'exit':
+                    output.innerHTML = `Welcome to Terminal Portfolio
+Type 'help' to see available commands\n`;
+                    break;
+                default:
+                    output.innerHTML += `Command not found: ${command}
+Type 'help' for a list of available commands\n`;
+            }
+        }
+    </script>
     
